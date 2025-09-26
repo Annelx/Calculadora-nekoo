@@ -321,6 +321,7 @@
             const numeroParaMaquina = Math.floor(qtdPapel / 25);
 
             const valorGerente = valorRoupas * 0.05;
+            const valorGerenteSemParceria = valorRoupas * 0.10;
             
             const valorFac = (valorRoupas * 0.20) - valorGerente;
             const valorFacSemParceria = (valorRoupas * 0.30) - valorGerente;
@@ -328,7 +329,7 @@
             document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(parceria)}`;
             document.getElementById('valorParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
             document.getElementById('valorSemParceria').innerText = `R$ ${formatarNumero(semParceria)}`;
-            document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
+            document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerenteSemParceria)}`;
             
             document.getElementById('valorFac').innerText = `R$ ${formatarNumero(valorFac)}`;
             document.getElementById('valorFacSemParceria').innerText = `R$ ${formatarNumero(valorFacSemParceria)}`;
@@ -428,4 +429,5 @@
     </script>
 </body>
 </html>
+
 
