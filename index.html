@@ -324,7 +324,7 @@
             const valorGerenteSemParceria = valorRoupas * 0.10;
             
             const valorFac = (valorRoupas * 0.20) - valorGerente;
-            const valorFacSemParceria = (valorRoupas * 0.30) - valorGerente;
+            const valorFacSemParceria = (valorRoupas * 0.30) - valorGerenteSemParceria;
 
             document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(parceria)}`;
             document.getElementById('valorParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
@@ -429,5 +429,6 @@
     </script>
 </body>
 </html>
+
 
 
