@@ -273,11 +273,12 @@
     </ul>
 </div>
 
-<div class="link-container">
+<div class="link-container" style="position: fixed; bottom: 20px; right: 20px; width: auto;">
     <a href='CalculadoraItens.html'>
-        <button class="reset-button">Calculadora de ITENS</button>
+        <button class="reset-button" style="padding: 8px 12px; font-size: 0.9em; border-radius: 5px;">Calculadora de ITENS</button>
     </a>
 </div>
+
 
     </div>
 
@@ -316,6 +317,11 @@
                 document.getElementById('valorFacSemParceria').innerText = 'R$ 0';
                 return;
             }
+            // Valores COM parceria
+            const valorParceria = valorRoupas * 0.80; // 80%
+
+            // Valores SEM parceria
+            const valorSemParceria = valorRoupas * 0.70; // 70%
 
             const qtdPapel = Math.floor(valorRoupas / 2000);
             const numeroParaMaquina = Math.floor(qtdPapel / 25);
@@ -404,5 +410,6 @@
     </script> 
 </body>
 </html>
+
 
 
