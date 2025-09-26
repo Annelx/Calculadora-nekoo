@@ -58,28 +58,29 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     }
     .reset-button {
-  background-color: #FF69B4;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  margin-top: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: medium;
-  Text-align: center;
+        background-color: #FF69B4;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 0.9em;
+        display: block;          /* Faz ocupar a linha inteira */
+        margin-left: auto;       /* Centraliza */
+        margin-right: auto;      /* Centraliza */
     }
     .reset-all-button {
-  background-color: #FF69B4;
-  color: white;
-  border: none;
-  padding: 15px 100px;
-  margin-top: 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1em;
-  WIext-align: center;
-  width: 100%;
-  margin-bottom: 30px;
+        background-color: #FF69B4;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        margin-top: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1em;
+        width: 100%;             /* De ponta a ponta */
+    }
     .reset-button:hover, .reset-all-button:hover {
         opacity: 0.8;
     }
@@ -106,6 +107,10 @@
     .link-container {
         align-self: flex-end;
         margin-top: 20px;
+    }
+    .link-container button {
+        padding: 12px 25px !important; /* Botão maior */
+        font-size: 1em !important;
     }
     .result-cell {
         display: flex;
@@ -267,7 +272,7 @@
     </ul>
     <div class="link-container">
         <a href='CalculadoraItens.html'>
-            <button class="reset-button" style="padding:5px 10px;font-size:0.8em;">Calculadora de ITENS</button>
+            <button class="reset-button">Calculadora de ITENS</button>
         </a>
     </div>
 </div>
@@ -282,8 +287,6 @@ function formatarInput(input) {
     let valor = input.value.replace(/[^\d]/g, '');
     input.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
-
-function roundDownToNearest25(num) { return Math.floor(num / 25) * 25; }
 
 // ====== Dinheiro Sujo ======
 function calcularTotaisRoupas() {
@@ -359,4 +362,3 @@ function resetTudo() {
 </script>
 </body>
 </html>
-
