@@ -5,104 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CALCULADORA NEKO</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #030303;
-    color: rgb(250, 250, 250);
-    background-image: url('https://cdn.discordapp.com/attachments/1292168027311177918/1307015639252205749/Screenshot_39-enhanced.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
-}
-.calculator-column {
-    flex: 1;
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: rgba(68, 68, 68, 0.7);
-}
-.calculator-column h3 {
-    text-align: center;
-    color: #FF69B4;
-}
-.calculator-column input, .calculator-column p {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-    box-sizing: border-box;
-    background-color: #555;
-    color: white;
-    border: 1px solid #777;
-}
-.header {
-    text-align: center;
-    width: 100%;
-    margin-bottom: 30px;
-}
-.header h1 {
-    font-size: 2em;
-    margin: 0;
-    color: #FF69B4;
-    background-color: rgb(244, 247, 247);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-.reset-button {
-    background-color: #FF69B4;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.reset-button:hover {
-    opacity: 0.8;
-}
-.result-cell {
-    display: flex;
-    width: 100%;
-    margin-bottom: 10px;
-    border: 1px solid #777;
-    border-radius: 5px;
-    overflow: hidden;
-}
-.result-cell .value-part {
-    flex: 1;
-    padding: 8px;
-    background-color: #555;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.result-cell .value-part:not(:last-child) {
-    border-right: 1px solid #777;
-}
-.result-label {
-    font-size: 0.8em;
-    color: #ccc;
-    margin-bottom: 5px;
-}
-.link-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}
-.link-container button {
-    padding: 8px 12px;
-    font-size: 0.9em;
-}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #030303;
+        color: rgb(250, 250, 250);
+        background-image: url('https://cdn.discordapp.com/attachments/1292168027311177918/1307015639252205749/Screenshot_39-enhanced.png?ex=6738c4ab&is=6737732b&hm=6b2b32e55840f3a62bc2973a141fe0bc5e140171ed5d98d823485e681c757225&');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px;
+    }
+    .calculator-column {
+        flex: 1;
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: rgba(68, 68, 68, 0.7);
+    }
+    .calculator-column h3 {
+        text-align: center;
+        color: #FF69B4;
+    }
+    .calculator-column input, .calculator-column p {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        box-sizing: border-box;
+        background-color: #555;
+        color: white;
+        border: 1px solid #777;
+    }
+    .header {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .header h1 {
+        font-size: 2em;
+        margin: 0;
+        color: #FF69B4;
+        background-color: rgb(244, 247, 247);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+    .reset-button {
+        background-color: #FF69B4;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 0.9em;
+    }
+    .reset-all-button {
+        background-color: #FF69B4;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        margin-top: 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+    .reset-button:hover, .reset-all-button:hover {
+        opacity: 0.8;
+    }
+    .info-section {
+        text-align: left;
+        color: white;
+        margin-top: 30px;
+        padding: 20px;
+        background-color: rgba(68, 68, 68, 0.7);
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+    }
+    .info-section h3 {
+        margin-bottom: 10px;
+    }
+    .info-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .info-section ul li {
+        margin: 10px 0;
+    }
+    .link-container {
+        align-self: flex-end;
+        margin-top: 20px;
+    }
+    .result-cell {
+        display: flex;
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid #777;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .result-cell .value-part {
+        flex: 1;
+        padding: 8px;
+        background-color: #555;
+        color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .result-cell .value-part:not(:last-child) {
+        border-right: 1px solid #777;
+    }
+    .result-label {
+        font-size: 0.8em;
+        color: #ccc;
+        margin-bottom: 5px;
+    }
 </style>
 </head>
 <body>
@@ -112,12 +140,11 @@ body {
 </div>
 
 <div class="container">
-    <!-- CALCULADORA DINHEIRO SUJO -->
+    <!-- Dinheiro Sujo -->
     <div class="calculator-column">
         <h3>Calcular dinheiro sujo</h3>
         <label for="valorRoupas">Quantidade de dinheiro sujo</label>
         <input type="text" id="valorRoupas" oninput="calcularTotaisRoupas(); formatarInput(this)" placeholder="Digite a quantidade de dinheiro">
-        
         <div class="result-cell">
             <div class="value-part">
                 <span class="result-label">Valor na parceria</span>
@@ -132,7 +159,6 @@ body {
                 <span id="valorParceriaDesconto">R$ 0</span>
             </div>
         </div>
-
         <div class="result-cell">
             <div class="value-part">
                 <span class="result-label">Valor sem parceria</span>
@@ -147,69 +173,62 @@ body {
                 <span id="valorSemParceriaDesconto">R$ 0</span>
             </div>
         </div>
-        
         <div class="result-cell">
             <div class="value-part">
                 <span class="result-label">Quantidade de papel para lavar</span>
                 <span id="qtdPapelRoupas">0</span>
             </div>
             <div class="value-part">
-                <span class="result-label">Numero para colocar na maquina</span>
+                <span class="result-label">Número para colocar na máquina</span>
                 <span id="numeroParaMaquina">0</span>
             </div>
         </div>
-        
-        <button class="reset-button" onclick="resetCalculadoraRoupas()" style="width:100%;">Reset</button>
+        <button class="reset-button" onclick="resetCalculadoraRoupas()">Reset</button>
     </div>
 
-    <!-- CALCULADORA DINHEIRO SUJO E MOLHADO -->
+    <!-- Dinheiro Sujo e Molhado -->
     <div class="calculator-column">
         <h3>Calcular dinheiro sujo e molhado</h3>
         <label for="valorRoupasMolhadas">Quantidade de dinheiro sujo e molhado</label>
         <input type="text" id="valorRoupasMolhadas" oninput="calcularTotaisRoupasMolhadas(); formatarInput(this)" placeholder="Digite a quantidade de dinheiro">
-        
         <div class="result-cell">
             <div class="value-part">
-                <span class="result-label">Dinheiro sujo após secar</span>
+                <span class="result-label">Dinheiro após secar (-30%)</span>
                 <span id="dinheiroSeco">R$ 0</span>
             </div>
         </div>
-
         <div class="result-cell">
             <div class="value-part">
                 <span class="result-label">Valor na parceria</span>
                 <span id="valorParceriaMolhadas">R$ 0</span>
             </div>
             <div class="value-part">
-                <span class="result-label">Valor do gerente</span>
+                <span class="result-label">Valor da FAC</span>
                 <span id="valorFacMolhadas">R$ 0</span>
             </div>
             <div class="value-part">
-                <span class="result-label">Valor da FAC</span>
+                <span class="result-label">Valor do gerente</span>
                 <span id="valorParceriaMolhadasDesconto">R$ 0</span>
             </div>
         </div>
-        
         <div class="result-cell">
             <div class="value-part">
                 <span class="result-label">Quantidade de papel para lavar</span>
                 <span id="qtdPapelMolhadas">0</span>
             </div>
             <div class="value-part">
-                <span class="result-label">Numero para colocar na maquina</span>
+                <span class="result-label">Número para colocar na máquina</span>
                 <span id="numeroParaMaquinaMolhado">0</span>
             </div>
         </div>
-
-        <button class="reset-button" onclick="resetCalculadoraRoupasMolhadas()" style="width:100%;">Reset</button>
+        <button class="reset-button" onclick="resetCalculadoraRoupasMolhadas()">Reset</button>
     </div>
 
-    <!-- CALCULADORA DINHEIRO MOLHADO -->
+    <!-- Dinheiro Molhado -->
     <div class="calculator-column">
         <h3>Calcular dinheiro molhado</h3>
         <label for="valorRoupasMolhadasUnica">Quantidade de dinheiro molhado</label>
         <input type="text" id="valorRoupasMolhadasUnica" oninput="calcularTotaisRoupasMolhadasUnica(); formatarInput(this)" placeholder="Digite a quantidade de dinheiro molhado">
-        
         <div class="result-cell">
             <div class="value-part">
                 <span class="result-label">Valor na parceria</span>
@@ -224,8 +243,7 @@ body {
                 <span id="valorParceriaMolhadasUnicaDesconto">R$ 0</span>
             </div>
         </div>
-        
-        <button class="reset-button" onclick="resetCalculadoraRoupasMolhadasUnica()" style="width:100%;">Reset</button>
+        <button class="reset-button" onclick="resetCalculadoraRoupasMolhadasUnica()">Reset</button>
     </div>
 </div>
 
@@ -233,10 +251,22 @@ body {
     <button class="reset-all-button" onclick="resetTudo()">Resetar Tudo</button>
 </div>
 
-<div class="link-container">
-    <a href='CalculadoraItens.html'>
-        <button class="reset-button">Calculadora de ITENS</button>
-    </a>
+<div class="info-section">
+    <h3>Informações sobre os cálculos:</h3>
+    <ul>
+        <li><strong>Dinheiro sujo:</strong><br>
+            Parceria devolvemos 80%<br>
+            Sem parceria devolvemos 70%
+        </li>
+        <li><strong>Dinheiro molhado ou sujo e molhado:</strong><br>
+            Parceria devolvemos 50%, FAC 15%, Gerente 5%
+        </li>
+    </ul>
+    <div class="link-container">
+        <a href='CalculadoraItens.html'>
+            <button class="reset-button" style="padding:5px 10px;font-size:0.8em;">Calculadora de ITENS</button>
+        </a>
+    </div>
 </div>
 
 <script>
@@ -244,61 +274,85 @@ function formatarNumero(numero) {
     if (typeof numero !== 'number') numero = parseFloat(numero);
     return numero.toLocaleString('pt-BR');
 }
+
 function formatarInput(input) {
     let valor = input.value.replace(/[^\d]/g, '');
     input.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
 
-// FUNÇÃO CORRIGIDA
+function roundDownToNearest25(num) { return Math.floor(num / 25) * 25; }
+
+// ====== Dinheiro Sujo ======
 function calcularTotaisRoupas() {
-    const valorRoupas = parseFloat(document.getElementById('valorRoupas').value.replace(/[^\d]/g, ''));
-    if (!valorRoupas || isNaN(valorRoupas)) {
-        document.getElementById('valorParceria').innerText = 'R$ 0';
-        document.getElementById('valorParceriaDesconto').innerText = 'R$ 0';
-        document.getElementById('valorSemParceria').innerText = 'R$ 0';
-        document.getElementById('valorSemParceriaDesconto').innerText = 'R$ 0';
-        document.getElementById('qtdPapelRoupas').innerText = '0';
-        document.getElementById('numeroParaMaquina').innerText = '0';
-        document.getElementById('valorFac').innerText = 'R$ 0';
-        document.getElementById('valorFacSemParceria').innerText = 'R$ 0';
-        return;
-    }
-
-    const qtdPapel = Math.floor(valorRoupas / 2000);
+    const valor = parseFloat(document.getElementById('valorRoupas').value.replace(/[^\d]/g,'')) || 0;
+    const qtdPapel = Math.floor(valor / 2000);
     const numeroParaMaquina = Math.floor(qtdPapel / 25);
-
-    // Valores COM parceria e SEM parceria corrigidos
-    const valorParceria = valorRoupas * 0.80; // 80%
-    const valorSemParceria = valorRoupas * 0.70; // 70%
-
-    // Valores do gerente e FAC continuam iguais
-    const valorGerente = valorRoupas * 0.05;
-    const valorFac = valorRoupas * 0.15;
-    const valorGerenteSemParceria = valorRoupas * 0.10;
-    const valorFacSemParceria = valorRoupas * 0.20;
-
+    const valorParceria = valor * 0.8; 
+    const valorSemParceria = valor * 0.7;
+    const valorGerente = valor * 0.05;
+    const valorFAC = valor * 0.15;
+    const valorGerenteSem = valor * 0.10;
+    const valorFACSem = valor * 0.20;
+    
     document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(valorParceria)}`;
     document.getElementById('valorParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
-    document.getElementById('valorFac').innerText = `R$ ${formatarNumero(valorFac)}`;
-
+    document.getElementById('valorFac').innerText = `R$ ${formatarNumero(valorFAC)}`;
     document.getElementById('valorSemParceria').innerText = `R$ ${formatarNumero(valorSemParceria)}`;
-    document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerenteSemParceria)}`;
-    document.getElementById('valorFacSemParceria').innerText = `R$ ${formatarNumero(valorFacSemParceria)}`;
-
-    document.getElementById('qtdPapelRoupas').innerText = `${formatarNumero(qtdPapel)}`;
-    document.getElementById('numeroParaMaquina').innerText = `${formatarNumero(numeroParaMaquina)}`;
+    document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerenteSem)}`;
+    document.getElementById('valorFacSemParceria').innerText = `R$ ${formatarNumero(valorFACSem)}`;
+    document.getElementById('qtdPapelRoupas').innerText = formatarNumero(qtdPapel);
+    document.getElementById('numeroParaMaquina').innerText = formatarNumero(numeroParaMaquina);
 }
 
-// Reset funções
+// ====== Dinheiro Sujo e Molhado ======
+function calcularTotaisRoupasMolhadas() {
+    const valor = parseFloat(document.getElementById('valorRoupasMolhadas').value.replace(/[^\d]/g,'')) || 0;
+    const valorSeco = valor * 0.7; // Apenas informativo (30% tirado)
+    document.getElementById('dinheiroSeco').innerText = `R$ ${formatarNumero(valorSeco)}`;
+
+    const valorParceria = valor * 0.5; // 50% do bruto
+    const valorFAC = valor * 0.15; 
+    const valorGerente = valor * 0.05;
+    const qtdPapel = Math.floor(valorSeco / 2000);
+    const numeroParaMaquina = Math.floor(qtdPapel / 25);
+
+    document.getElementById('valorParceriaMolhadas').innerText = `R$ ${formatarNumero(valorParceria)}`;
+    document.getElementById('valorFacMolhadas').innerText = `R$ ${formatarNumero(valorFAC)}`;
+    document.getElementById('valorParceriaMolhadasDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
+    document.getElementById('qtdPapelMolhadas').innerText = formatarNumero(qtdPapel);
+    document.getElementById('numeroParaMaquinaMolhado').innerText = formatarNumero(numeroParaMaquina);
+}
+
+// ====== Dinheiro Molhado ======
+function calcularTotaisRoupasMolhadasUnica() {
+    const valor = parseFloat(document.getElementById('valorRoupasMolhadasUnica').value.replace(/[^\d]/g,'')) || 0;
+    const valorParceria = valor * 0.5; 
+    const valorFAC = valor * 0.15;
+    const valorGerente = valor * 0.05;
+
+    document.getElementById('valorParceriaMolhadasUnica').innerText = `R$ ${formatarNumero(valorParceria)}`;
+    document.getElementById('valorFacMolhadasUnica').innerText = `R$ ${formatarNumero(valorFAC)}`;
+    document.getElementById('valorParceriaMolhadasUnicaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
+}
+
+// ====== Reset ======
 function resetCalculadoraRoupas() {
     document.getElementById('valorRoupas').value = '';
     calcularTotaisRoupas();
 }
-function resetCalculadoraRoupasMolhadas() { document.getElementById('valorRoupasMolhadas').value=''; calcularTotaisRoupasMolhadas(); }
-function resetCalculadoraRoupasMolhadasUnica() { document.getElementById('valorRoupasMolhadasUnica').value=''; calcularTotaisRoupasMolhadasUnica(); }
-function resetTudo() { resetCalculadoraRoupas(); resetCalculadoraRoupasMolhadas(); resetCalculadoraRoupasMolhadasUnica(); }
-
-// Funções adicionais (molhadas) permanecem como antes...
+function resetCalculadoraRoupasMolhadas() {
+    document.getElementById('valorRoupasMolhadas').value = '';
+    calcularTotaisRoupasMolhadas();
+}
+function resetCalculadoraRoupasMolhadasUnica() {
+    document.getElementById('valorRoupasMolhadasUnica').value = '';
+    calcularTotaisRoupasMolhadasUnica();
+}
+function resetTudo() {
+    resetCalculadoraRoupas();
+    resetCalculadoraRoupasMolhadas();
+    resetCalculadoraRoupasMolhadasUnica();
+}
 </script>
 </body>
 </html>
