@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝐂𝐚𝐥𝐜𝐮𝐥𝐚𝐝𝐨𝐫𝐚 𝐝𝐞 𝐈𝐭𝐞𝐧𝐬</title>
+    <style>
+        /* Tema Canadá - Ajustes para parecer com a calculadora principal */
+        body {
+            background-color: #030303;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            position: relative;
+        }
+        h1 {
+            color: #FF69B4;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #555;
+            text-align: center;
+        }
+        th {
+            background-color: #FF69B4;
+            color: #fff;
+        }
+        input, button {
+            margin: 5px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        input[type="number"] {
+            width: 60px;
+            background-color: #555;
+            color: #fff;
+            border: 1px solid #777;
+        }
+        button {
+            background-color:#FF69B4;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color:#FF69B4;
+        }
+        
+        .resultados-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 30px;
+        }
+
+        .secao-resultado {
+            flex: 1;
+            min-width: 280px;
+            border: 1px solid #FF69B4;
+            padding: 15px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            background-color: rgba(68, 68, 68, 0.7);
+        }
+        .secao-resultado h2 {
+            color: #FF69B4;
+            text-align: center;
+        }
+        .secao-resultado p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        .opcoes-valor-copia {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .opcoes-valor-copia label {
+            margin-right: 15px;
+        }
+        .opcoes-valor-copia input {
+            width: auto;
+        }
+
+        #btn-copiar, #btn-reset {
+            background-color: #FF69B4;
+            color: white;
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+
+        #btn-reset {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+        }
+
+        #btn-copiar:hover, #btn-reset:hover {
+            background-color: #FF69B4;
+        }
+
+        #btn-voltar-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        #btn-voltar-container a button {
+            background-color: #FF69B4;
+            color: white;
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-bottom: 0;
+            border-radius: 5px;
+        }
+        #btn-voltar-container a button:hover {
+            background-color: #FF69B4;
+        }
+    </style>
+</head>
+<body>
+
+<h1>𝐂𝐚𝐥𝐜𝐮𝐥𝐚𝐝𝐨𝐫𝐚 𝐝𝐞 𝐈𝐭𝐞𝐧𝐬 𝐍𝐞𝐤𝐨</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Quantidade</th>
+            <th>Itens</th>
+            <th>Valor de Parceria</th>
+            <th>Valor sem Parceria</th>
+            <th>Quantidade de Metal</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="number" id="qtd-algema" oninput="calcular()" min="0"></td>
+            <td>Algema</td>
+            <td>6.075</td>
+            <td>6.750</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td><input type="number" id="qtd-capuz" oninput="calcular()" min="0"></td>
+            <td>Capuz</td>
+            <td>6.075</td>
+            <td>6.750</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td><input type="number" id="qtd-Gás Lacrimogênio" oninput="calcular()" min="0"></td>
+            <td>Lockpick</td>
+            <td>10.125</td>
+            <td>11.250</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td><input type="number" id="qtd-colete" oninput="calcular()" min="0"></td>
+            <td>Colete</td>
+            <td>7.290</td>
+            <td>8.100</td>
+            <td>18</td>
+        </tr>
+    </tbody>
+</table>
+
+<button id="btn-reset" onclick="resetar()">Resetar</button>
+
+<hr>
+
+<div class="resultados-container">
+    <div class="secao-resultado">
+        <h2>Resultados Totais</h2>
+        <p class="resultado">Total Valor de Parceria: R$ <span id="total-parceria">0</span></p>
+        <p class="resultado">Total Valor sem Parceria: R$ <span id="total-sem-parceria">0</span></p>
+        <p class="resultado">Total de Metal: <span id="total-metal">0</span></p>
+    </div>
+
+    <div class="secao-resultado">
+        <div class="opcoes-valor-copia">
+            <input type="checkbox" id="chk-parceria-copia" name="tipo-valor-copia" value="parceria" checked onchange="calcularCopia()">
+            <label for="chk-parceria-copia">Parceria</label>
+            <input type="checkbox" id="chk-sem-parceria-copia" name="tipo-valor-copia" value="semParceria" onchange="calcularCopia()">
+            <label for="chk-sem-parceria-copia">Sem Parceria</label>
+        </div>
+        <p>Itens: <span id="resultado-item"></span></p>
+        <p>Quantidade: <span id="resultado-quantidade"></span></p>
+        <p>Valor: R$ <span id="resultado-valor"></span></p>
+        <p>Valor a ser depositado no banco: R$ <span id="valor-deposito">0</span></p>
+        <p>Comissão do gerente: R$ <span id="comissao-gerente">0</span></p>
+        <p>Fac: </p>
+        <button id="btn-copiar" onclick="copiarResultados()">Copiar</button>
+    </div>
+</div>
+
+<div id="btn-voltar-container">
+    <a href='file:///C:/NEKO/.vscode/CalculadoraNeko.html'>
+        <button id="btn-voltar">Calculadora DINHEIRO SUJO</button>
+    </a>
+</div>
+
+<script>
+    function formatarValor(valor) {
+        // Usa toFixed para arredondar e toLocaleString para formatar a pontuação
+        return Math.round(valor).toLocaleString('pt-BR');
+    }
+
+    const quantidadesAtuais = {};
+
+    function calcular() {
+        let totalParceriaGeral = 0; 
+        let totalSemParceriaGeral = 0; 
+        let totalMetalGeral = 0; 
+
+        const itens = {
+            "algema": {nome: "Algema", parceria: 6075, semParceria: 6750, metal: 15},
+            "capuz": {nome: "Capuz", parceria: 6075, semParceria: 6750, metal: 15},
+            "Gás Lacrimogênio": {nome: "Gás Lacrimogênio", parceria: 10125, semParceria: 11250, metal: 15},
+            "colete": {nome: "Colete", parceria: 7290, semParceria: 8100, metal: 18}
+        };
+
+        for (const itemId in itens) {
+            const quantidadeInput = document.getElementById(`qtd-${itemId}`);
+            const quantidade = parseInt(quantidadeInput.value) || 0;
+            
+            quantidadesAtuais[itemId] = quantidade;
+
+            totalParceriaGeral += itens[itemId].parceria * quantidade;
+            totalSemParceriaGeral += itens[itemId].semParceria * quantidade;
+            totalMetalGeral += itens[itemId].metal * quantidade;
+        }
+
+        document.getElementById('total-parceria').innerText = formatarValor(totalParceriaGeral);
+        document.getElementById('total-sem-parceria').innerText = formatarValor(totalSemParceriaGeral);
+        document.getElementById('total-metal').innerText = totalMetalGeral;
+
+        calcularCopia();
+    }
+
+    function calcularCopia() {
+        let totalValorCopia = 0;
+        let nomesItensCopia = [];
+        let quantidadesItensCopia = [];
+
+        const usarParceriaCopia = document.getElementById('chk-parceria-copia').checked;
+        const usarSemParceriaCopia = document.getElementById('chk-sem-parceria-copia').checked;
+
+        const itens = { 
+            "algema": {nome: "Algema", parceria: 6075, semParceria: 6750, metal: 15},
+            "capuz": {nome: "Capuz", parceria: 6075, semParceria: 6750, metal: 15},
+            "Gás Lacrimogênio": {nome: "Gás Lacrimogênio", parceria: 10125, semParceria: 11250, metal: 15},
+            "colete": {nome: "Colete", parceria: 7290, semParceria: 8100, metal: 18}
+        };
+
+        for (const itemId in itens) {
+            const quantidade = quantidadesAtuais[itemId] || 0;
+
+            if (quantidade > 0) {
+                if (usarParceriaCopia) {
+                    totalValorCopia += itens[itemId].parceria * quantidade;
+                } else if (usarSemParceriaCopia) {
+                    totalValorCopia += itens[itemId].semParceria * quantidade;
+                }
+                nomesItensCopia.push(itens[itemId].nome);
+                quantidadesItensCopia.push(quantidade);
+            }
+        }
+        
+        // CORREÇÃO: Calculamos o valor do depósito e da comissão de forma exata.
+        const valorDeposito = totalValorCopia * 0.90;
+        const comissaoGerente = totalValorCopia * 0.10;
+
+        document.getElementById('resultado-item').innerText = nomesItensCopia.join(', ');
+        document.getElementById('resultado-quantidade').innerText = quantidadesItensCopia.join(', ');
+        document.getElementById('resultado-valor').innerText = formatarValor(totalValorCopia);
+        document.getElementById('valor-deposito').innerText = formatarValor(valorDeposito);
+        document.getElementById('comissao-gerente').innerText = formatarValor(comissaoGerente);
+    }
+
+    function copiarResultados() {
+        const item = document.getElementById('resultado-item').innerText;
+        const quantidade = document.getElementById('resultado-quantidade').innerText;
+        const valor = document.getElementById('resultado-valor').innerText;
+        const valorDeposito = document.getElementById('valor-deposito').innerText;
+        const comissaoGerente = document.getElementById('comissao-gerente').innerText;
+        
+        const textoParaCopiar = `Itens: ${item}\nQuantidade: ${quantidade}\nValor: R$ ${valor}\nValor a ser depositado no banco: R$ ${valorDeposito}\nComissão do gerente: R$ ${comissaoGerente}\nFac: `;
+
+        navigator.clipboard.writeText(textoParaCopiar).catch(err => {
+            console.error('Erro ao copiar: ', err);
+        });
+    }
+
+    function resetar() {
+        const inputs = document.querySelectorAll('#qtd-pendrive, #qtd-mochila-reforcada, #qtd-algema, #qtd-capuz, #qtd-lockpick, #qtd-colete');
+        inputs.forEach(input => input.value = '');
+
+        document.getElementById('chk-parceria-copia').checked = true;
+        document.getElementById('chk-sem-parceria-copia').checked = false;
+
+        document.getElementById('total-parceria').innerText = '0';
+        document.getElementById('total-sem-parceria').innerText = '0';
+        document.getElementById('total-metal').innerText = '0';
+
+        document.getElementById('resultado-item').innerText = '';
+        document.getElementById('resultado-quantidade').innerText = '';
+        document.getElementById('resultado-valor').innerText = '0';
+        document.getElementById('valor-deposito').innerText = '0';
+        document.getElementById('comissao-gerente').innerText = '0';
+        
+        for (const key in quantidadesAtuais) {
+            delete quantidadesAtuais[key];
+        }
+
+        calcular(); 
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const chkParceriaCopia = document.getElementById('chk-parceria-copia');
+        const chkSemParceriaCopia = document.getElementById('chk-sem-parceria-copia');
+
+        chkParceriaCopia.addEventListener('change', function() {
+            if (this.checked) {
+                chkSemParceriaCopia.checked = false;
+            } else if (!chkSemParceriaCopia.checked) {
+                this.checked = true;
+            }
+            calcularCopia();
+        });
+
+        chkSemParceriaCopia.addEventListener('change', function() {
+            if (this.checked) {
+                chkParceriaCopia.checked = false;
+            } else if (!chkParceriaCopia.checked) {
+                this.checked = true;
+            }
+            calcularCopia();
+        });
+
+        calcular(); 
+    });
+</script>
+
+</body>
+</html>
