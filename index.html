@@ -279,127 +279,119 @@
     </div>
 
     <script>
-        // Função para formatar números com separador de milhar
-        function formatarNumero(numero) {
-            if (typeof numero !== 'number') {
-                numero = parseFloat(numero);
-            }
-            return numero.toLocaleString('pt-BR');
-        }
+    // Função para formatar números com separador de milhar
+    function formatarNumero(numero) {
+        if (typeof numero !== 'number') numero = parseFloat(numero);
+        return numero.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+    }
 
-        // Função para formatar o valor digitado na caixa de entrada com ponto
-        function formatarInput(input) {
-            let valor = input.value.replace(/[^\d]/g, '');
-            input.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        }
-        
-        // Função para arredondar para o múltiplo de 25 mais próximo para baixo
-        function roundDownToNearest25(num) {
-            return Math.floor(num / 25) * 25;
-        }
+    // Função para limpar input e deixar só números
+    function formatarInput(input) {
+        let valor = input.value.replace(/[^\d]/g,'');
+        input.value = valor.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+    }
 
-        // ====================== FUNÇÃO CORRIGIDA ======================
-        function calcularTotaisRoupas() {
-            const valorRoupas = document.getElementById('valorRoupas').value.replace(/[^\d]/g, '');
-            
-            if (!valorRoupas || isNaN(valorRoupas)) {
-                document.getElementById('valorParceria').innerText = 'R$ 0';
-                document.getElementById('valorParceriaDesconto').innerText = 'R$ 0';
-                document.getElementById('valorSemParceria').innerText = 'R$ 0';
-                document.getElementById('valorSemParceriaDesconto').innerText = 'R$ 0';
-                document.getElementById('qtdPapelRoupas').innerText = '0';
-                document.getElementById('numeroParaMaquina').innerText = '0';
-                document.getElementById('valorFac').innerText = 'R$ 0';
-                document.getElementById('valorFacSemParceria').innerText = 'R$ 0';
-                return;
-            }
+    // Função para arredondar para múltiplo de 25
+    function roundDownToNearest25(num) {
+        return Math.floor(num / 25) * 25;
+    }
 
-            const qtdPapel = Math.floor(valorRoupas / 2000);
-            const numeroParaMaquina = Math.floor(qtdPapel / 25);
+    // -------------------- DINHEIRO SUJO --------------------
+    function calcularTotaisRoupas() {
+        let valorStr = document.getElementById('valorRoupas').value.replace(/[^\d]/g,'');
+        let valor = parseFloat(valorStr);
+        if(isNaN(valor) || valor <= 0) valor = 0;
 
-            // Valores COM parceria
-            const valorGerente = valorRoupas * 0.05; // 5%
-            const valorFac = valorRoupas * 0.15;     // 15%
-            const valorParceria = valorGerente + valorFac;
+        // Valores COM parceria
+        let gerenteParceria = valor * 0.05; // 5%
+        let facParceria = valor * 0.15;     // 15%
+        let valorParceria = gerenteParceria + facParceria;
 
-            // Valores SEM parceria
-            const valorGerenteSemParceria = valorRoupas * 0.10; // 10%
-            const valorFacSemParceria = valorRoupas * 0.20;     // 20%
-            const valorSemParceria = valorGerenteSemParceria + valorFacSemParceria;
+        // Valores SEM parceria
+        let gerenteSemParceria = valor * 0.10; // 10%
+        let facSemParceria = valor * 0.20;     // 20%
+        let valorSemParceria = gerenteSemParceria + facSemParceria;
 
-            document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(valorParceria)}`;
-            document.getElementById('valorParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
-            document.getElementById('valorFac').innerText = `R$ ${formatarNumero(valorFac)}`;
+        // Papel e máquina
+        let qtdPapel = Math.floor(valor / 2000);
+        let numeroParaMaquina = Math.floor(qtdPapel / 25);
 
-            document.getElementById('valorSemParceria').innerText = `R$ ${formatarNumero(valorSemParceria)}`;
-            document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerenteSemParceria)}`;
-            document.getElementById('valorFacSemParceria').innerText = `R$ ${formatarNumero(valorFacSemParceria)}`;
+        // Atualiza resultados
+        document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(valorParceria)}`;
+        document.getElementById('valorParceriaDesconto').innerText = `R$ ${formatarNumero(gerenteParceria)}`;
+        document.getElementById('valorFac').innerText = `R$ ${formatarNumero(facParceria)}`;
 
-            document.getElementById('qtdPapelRoupas').innerText = `${formatarNumero(qtdPapel)}`;
-            document.getElementById('numeroParaMaquina').innerText = `${formatarNumero(numeroParaMaquina)}`;
-        }
-        // =================================================================
+        document.getElementById('valorSemParceria').innerText = `R$ ${formatarNumero(valorSemParceria)}`;
+        document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(gerenteSemParceria)}`;
+        document.getElementById('valorFacSemParceria').innerText = `R$ ${formatarNumero(facSemParceria)}`;
 
-        // Funções originais continuam sem alteração
-        function resetCalculadoraRoupas() {
-            document.getElementById('valorRoupas').value = '';
-            document.getElementById('valorParceria').innerText = 'R$ 0';
-            document.getElementById('valorParceriaDesconto').innerText = 'R$ 0';
-            document.getElementById('valorSemParceria').innerText = 'R$ 0';
-            document.getElementById('valorSemParceriaDesconto').innerText = 'R$ 0';
-            document.getElementById('qtdPapelRoupas').innerText = '0';
-            document.getElementById('numeroParaMaquina').innerText = '0';
-            document.getElementById('valorFac').innerText = 'R$ 0';
-            document.getElementById('valorFacSemParceria').innerText = 'R$ 0';
-        }
+        document.getElementById('qtdPapelRoupas').innerText = `${qtdPapel}`;
+        document.getElementById('numeroParaMaquina').innerText = `${numeroParaMaquina}`;
+    }
 
-        function calcularTotaisRoupasMolhadas() {
-            const valorRoupasMolhadas = document.getElementById('valorRoupasMolhadas').value.replace(/[^\d]/g, '');
-            if (!valorRoupasMolhadas || isNaN(valorRoupasMolhadas)) {
-                document.getElementById('dinheiroSeco').innerText = 'R$ 0';
-                document.getElementById('valorParceriaMolhadas').innerText = 'R$ 0';
-                document.getElementById('valorFacMolhadas').innerText = 'R$ 0';
-                document.getElementById('valorParceriaMolhadasDesconto').innerText = 'R$ 0';
-                document.getElementById('qtdPapelMolhadas').innerText = '0';
-                document.getElementById('numeroParaMaquinaMolhado').innerText = '0';
-                return;
-            }
+    // -------------------- DINHEIRO SUJO E MOLHADO --------------------
+    function calcularTotaisRoupasMolhadas() {
+        let valorStr = document.getElementById('valorRoupasMolhadas').value.replace(/[^\d]/g,'');
+        let valor = parseFloat(valorStr);
+        if(isNaN(valor) || valor <= 0) valor = 0;
 
-            const dinheiroSeco = valorRoupasMolhadas * 0.70;
-            document.getElementById('dinheiroSeco').innerText = `R$ ${formatarNumero(dinheiroSeco)}`;
+        // Dinheiro seco (70% do valor inicial)
+        let dinheiroSeco = valor * 0.7;
 
-            const parceriaFinal = dinheiroSeco * 0.80;
-            const valorFac = dinheiroSeco * 0.05;
-            const valorGerente = (dinheiroSeco * 0.20) - valorFac;
-            
-            const qtdPapelMolhadas = Math.floor(dinheiroSeco / 2000);
-            const numeroParaMaquinaMolhado = Math.floor(qtdPapelMolhadas / 25);
-            
-            document.getElementById('valorParceriaMolhadas').innerText = `R$ ${formatarNumero(parceriaFinal)}`;
-            document.getElementById('valorFacMolhadas').innerText = `R$ ${formatarNumero(valorGerente)}`;
-            document.getElementById('valorParceriaMolhadasDesconto').innerText = `R$ ${formatarNumero(valorFac)}`;
+        // Valores COM parceria (50% de desconto)
+        let valorParceria = dinheiroSeco * 0.5;
+        let gerente = valorParceria * 0.1; // 10% do bruto
+        let fac = valorParceria * 0.2;     // 20% do bruto
 
-            document.getElementById('qtdPapelMolhadas').innerText = `${formatarNumero(qtdPapelMolhadas)}`;
-            document.getElementById('numeroParaMaquinaMolhado').innerText = `${formatarNumero(numeroParaMaquinaMolhado)}`;
-        }
+        let qtdPapel = Math.floor(dinheiroSeco / 2000);
+        let numeroParaMaquina = Math.floor(qtdPapel / 25);
 
-        function resetCalculadoraRoupasMolhadas() {
-            document.getElementById('valorRoupasMolhadas').value = '';
-            document.getElementById('dinheiroSeco').innerText = 'R$ 0';
-            document.getElementById('valorParceriaMolhadas').innerText = 'R$ 0';
-            document.getElementById('valorFacMolhadas').innerText = 'R$ 0';
-            document.getElementById('valorParceriaMolhadasDesconto').innerText = 'R$ 0';
-            document.getElementBy
+        document.getElementById('dinheiroSeco').innerText = `R$ ${formatarNumero(dinheiroSeco)}`;
+        document.getElementById('valorParceriaMolhadas').innerText = `R$ ${formatarNumero(valorParceria)}`;
+        document.getElementById('valorFacMolhadas').innerText = `R$ ${formatarNumero(fac)}`;
+        document.getElementById('valorParceriaMolhadasDesconto').innerText = `R$ ${formatarNumero(gerente)}`;
+        document.getElementById('qtdPapelMolhadas').innerText = qtdPapel;
+        document.getElementById('numeroParaMaquinaMolhado').innerText = numeroParaMaquina;
+    }
 
-        // Função para resetar todas as calculadoras
-        function resetTudo() {
-            resetCalculadoraRoupas();
-            resetCalculadoraRoupasMolhadas();
-            resetCalculadoraRoupasMolhadasUnica();
-        }
-    </script>
+    // -------------------- DINHEIRO MOLHADO --------------------
+    function calcularTotaisRoupasMolhadasUnica() {
+        let valorStr = document.getElementById('valorRoupasMolhadasUnica').value.replace(/[^\d]/g,'');
+        let valor = parseFloat(valorStr);
+        if(isNaN(valor) || valor <= 0) valor = 0;
+
+        // Valores COM parceria (50% de desconto)
+        let valorParceria = valor * 0.5;
+        let gerente = valorParceria * 0.1; // 10% do bruto
+        let fac = valorParceria * 0.2;     // 20% do bruto
+
+        document.getElementById('valorParceriaMolhadasUnica').innerText = `R$ ${formatarNumero(valorParceria)}`;
+        document.getElementById('valorFacMolhadasUnica').innerText = `R$ ${formatarNumero(fac)}`;
+        document.getElementById('valorParceriaMolhadasUnicaDesconto').innerText = `R$ ${formatarNumero(gerente)}`;
+    }
+
+    // -------------------- RESET --------------------
+    function resetCalculadoraRoupas() {
+        document.getElementById('valorRoupas').value = '';
+        calcularTotaisRoupas();
+    }
+    function resetCalculadoraRoupasMolhadas() {
+        document.getElementById('valorRoupasMolhadas').value = '';
+        calcularTotaisRoupasMolhadas();
+    }
+    function resetCalculadoraRoupasMolhadasUnica() {
+        document.getElementById('valorRoupasMolhadasUnica').value = '';
+        calcularTotaisRoupasMolhadasUnica();
+    }
+    function resetTudo() {
+        resetCalculadoraRoupas();
+        resetCalculadoraRoupasMolhadas();
+        resetCalculadoraRoupasMolhadasUnica();
+    }
+</script>
 </body>
 </html>
+
 
 
 
