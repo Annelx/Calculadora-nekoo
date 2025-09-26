@@ -298,7 +298,7 @@
             return Math.floor(num / 25) * 25;
         }
 
-        // Função para calcular os totais da primeira calculadora (Dinheiro sujo)
+        // ====================== FUNÇÃO CORRIGIDA ======================
         function calcularTotaisRoupas() {
             const valorRoupas = document.getElementById('valorRoupas').value.replace(/[^\d]/g, '');
             
@@ -314,31 +314,33 @@
                 return;
             }
 
-            const parceria = valorRoupas - (valorRoupas * 0.20);
-            const semParceria = valorRoupas - (valorRoupas * 0.30);
             const qtdPapel = Math.floor(valorRoupas / 2000);
-            
             const numeroParaMaquina = Math.floor(qtdPapel / 25);
 
-            const valorGerente = valorRoupas * 0.05;
-            const valorGerenteSemParceria = valorRoupas * 0.10;
-            
-            const valorFac = (valorRoupas * 0.20) - valorGerente;
-            const valorFacSemParceria = (valorRoupas * 0.30) - valorGerenteSemParceria;
+            // Valores COM parceria
+            const valorGerente = valorRoupas * 0.05; // 5%
+            const valorFac = valorRoupas * 0.15;     // 15%
+            const valorParceria = valorGerente + valorFac;
 
-            document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(parceria)}`;
+            // Valores SEM parceria
+            const valorGerenteSemParceria = valorRoupas * 0.10; // 10%
+            const valorFacSemParceria = valorRoupas * 0.20;     // 20%
+            const valorSemParceria = valorGerenteSemParceria + valorFacSemParceria;
+
+            document.getElementById('valorParceria').innerText = `R$ ${formatarNumero(valorParceria)}`;
             document.getElementById('valorParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
-            document.getElementById('valorSemParceria').innerText = `R$ ${formatarNumero(semParceria)}`;
-            document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerenteSemParceria)}`;
-            
             document.getElementById('valorFac').innerText = `R$ ${formatarNumero(valorFac)}`;
+
+            document.getElementById('valorSemParceria').innerText = `R$ ${formatarNumero(valorSemParceria)}`;
+            document.getElementById('valorSemParceriaDesconto').innerText = `R$ ${formatarNumero(valorGerenteSemParceria)}`;
             document.getElementById('valorFacSemParceria').innerText = `R$ ${formatarNumero(valorFacSemParceria)}`;
 
             document.getElementById('qtdPapelRoupas').innerText = `${formatarNumero(qtdPapel)}`;
             document.getElementById('numeroParaMaquina').innerText = `${formatarNumero(numeroParaMaquina)}`;
         }
+        // =================================================================
 
-        // Função para resetar a calculadora de dinheiro sujo
+        // Funções originais continuam sem alteração
         function resetCalculadoraRoupas() {
             document.getElementById('valorRoupas').value = '';
             document.getElementById('valorParceria').innerText = 'R$ 0';
@@ -351,7 +353,6 @@
             document.getElementById('valorFacSemParceria').innerText = 'R$ 0';
         }
 
-        // Função para calcular os totais da segunda calculadora (Dinheiro Sujo e Molhado)
         function calcularTotaisRoupasMolhadas() {
             const valorRoupasMolhadas = document.getElementById('valorRoupasMolhadas').value.replace(/[^\d]/g, '');
             if (!valorRoupasMolhadas || isNaN(valorRoupasMolhadas)) {
@@ -375,50 +376,20 @@
             const numeroParaMaquinaMolhado = Math.floor(qtdPapelMolhadas / 25);
             
             document.getElementById('valorParceriaMolhadas').innerText = `R$ ${formatarNumero(parceriaFinal)}`;
-            document.getElementById('valorFacMolhadas').innerText = `R$ ${formatarNumero(valorGerente)}`; // Valor do gerente agora no meio
-            document.getElementById('valorParceriaMolhadasDesconto').innerText = `R$ ${formatarNumero(valorFac)}`; // Valor do FAC agora por último
+            document.getElementById('valorFacMolhadas').innerText = `R$ ${formatarNumero(valorGerente)}`;
+            document.getElementById('valorParceriaMolhadasDesconto').innerText = `R$ ${formatarNumero(valorFac)}`;
 
             document.getElementById('qtdPapelMolhadas').innerText = `${formatarNumero(qtdPapelMolhadas)}`;
             document.getElementById('numeroParaMaquinaMolhado').innerText = `${formatarNumero(numeroParaMaquinaMolhado)}`;
         }
 
-        // Função para resetar a calculadora de dinheiro sujo e molhado
         function resetCalculadoraRoupasMolhadas() {
             document.getElementById('valorRoupasMolhadas').value = '';
             document.getElementById('dinheiroSeco').innerText = 'R$ 0';
             document.getElementById('valorParceriaMolhadas').innerText = 'R$ 0';
             document.getElementById('valorFacMolhadas').innerText = 'R$ 0';
             document.getElementById('valorParceriaMolhadasDesconto').innerText = 'R$ 0';
-            document.getElementById('qtdPapelMolhadas').innerText = '0';
-            document.getElementById('numeroParaMaquinaMolhado').innerText = '0';
-        }
-
-        // Função para calcular os totais da terceira calculadora (Dinheiro Molhado)
-        function calcularTotaisRoupasMolhadasUnica() {
-            const valorRoupasMolhadasUnica = document.getElementById('valorRoupasMolhadasUnica').value.replace(/[^\d]/g, '');
-            if (!valorRoupasMolhadasUnica || isNaN(valorRoupasMolhadasUnica)) {
-                document.getElementById('valorParceriaMolhadasUnica').innerText = 'R$ 0';
-                document.getElementById('valorFacMolhadasUnica').innerText = 'R$ 0';
-                document.getElementById('valorParceriaMolhadasUnicaDesconto').innerText = 'R$ 0';
-                return;
-            }
-
-            const parceria = valorRoupasMolhadasUnica * 0.50;
-            const valorGerente = valorRoupasMolhadasUnica * 0.05;
-            const valorFac = (valorRoupasMolhadasUnica * 0.50) - valorGerente;
-
-            document.getElementById('valorParceriaMolhadasUnica').innerText = `R$ ${formatarNumero(parceria)}`;
-            document.getElementById('valorFacMolhadasUnica').innerText = `R$ ${formatarNumero(valorFac)}`;
-            document.getElementById('valorParceriaMolhadasUnicaDesconto').innerText = `R$ ${formatarNumero(valorGerente)}`;
-        }
-
-        // Função para resetar a calculadora de dinheiro molhado
-        function resetCalculadoraRoupasMolhadasUnica() {
-            document.getElementById('valorRoupasMolhadasUnica').value = '';
-            document.getElementById('valorParceriaMolhadasUnica').innerText = 'R$ 0';
-            document.getElementById('valorFacMolhadasUnica').innerText = 'R$ 0';
-            document.getElementById('valorParceriaMolhadasUnicaDesconto').innerText = 'R$ 0';
-        }
+            document.getElementBy
 
         // Função para resetar todas as calculadoras
         function resetTudo() {
@@ -429,6 +400,7 @@
     </script>
 </body>
 </html>
+
 
 
 
