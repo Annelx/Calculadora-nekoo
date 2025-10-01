@@ -164,11 +164,18 @@
             <td>15</td>
         </tr>
         <tr>
-            <td><input type="number" id="qtd-Gás Lacrimogênio" oninput="calcular()" min="0"></td>
-            <td>Gás Lacrimogênio</td>
-            <td>10.125</td>
-            <td>11.250</td>
-            <td>25</td>
+            <td><input type="number" id="qtd-ticket" oninput="calcular()" min="0"></td>
+            <td>Ticket</td>
+            <td>3.240</td>
+            <td>3.600</td>
+            <td>8</td>
+        </tr>
+         <tr>
+            <td><input type="number" id="qtd-lockpick" oninput="calcular()" min="0"></td>
+            <td>Lockpick</td>
+            <td>6.075</td>
+            <td>6.750</td>
+            <td>15</td>
         </tr>
         <tr>
             <td><input type="number" id="qtd-colete" oninput="calcular()" min="0"></td>
@@ -231,7 +238,8 @@
         const itens = {
             "algema": {nome: "Algema", parceria: 6075, semParceria: 6750, metal: 15},
             "capuz": {nome: "Capuz", parceria: 6075, semParceria: 6750, metal: 15},
-            "Gás Lacrimogênio": {nome: "Gás Lacrimogênio", parceria: 10125, semParceria: 11250, metal: 25},
+            "ticket": {nome: "Ticket", parceria: 3240, semParceria: 3600, metal: 8},
+            "lockpick": {nome: "Lockpick", parceria: 6075, semParceria: 6750, metal: 15},
             "colete": {nome: "Colete", parceria: 7290, semParceria: 8100, metal: 18}
         };
 
@@ -264,7 +272,8 @@
         const itens = { 
             "algema": {nome: "Algema", parceria: 6075, semParceria: 6750, metal: 15},
             "capuz": {nome: "Capuz", parceria: 6075, semParceria: 6750, metal: 15},
-            "Gás Lacrimogênio": {nome: "Gás Lacrimogênio", parceria: 10125, semParceria: 11250, metal: 25},
+            "ticket": {nome: "Ticket", parceria: 3240, semParceria: 3600, metal: 8},
+            "lockpick": {nome: "Lockpick", parceria: 6075, semParceria: 6750, metal: 15},
             "colete": {nome: "Colete", parceria: 7290, semParceria: 8100, metal: 18}
         };
 
@@ -308,7 +317,7 @@
     }
 
     function resetar() {
-        const inputs = document.querySelectorAll('#qtd-pendrive, #qtd-mochila-reforcada, #qtd-algema, #qtd-capuz, #qtd-lockpick, #qtd-colete');
+        const inputs = document.querySelectorAll('#qtd-ticket, #qtd-mochila-reforcada, #qtd-algema, #qtd-capuz, #qtd-lockpick, #qtd-colete');
         inputs.forEach(input => input.value = '');
 
         document.getElementById('chk-parceria-copia').checked = true;
@@ -359,6 +368,7 @@
 
 </body>
 </html>
+
 
 
 
